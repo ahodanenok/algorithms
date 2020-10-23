@@ -8,5 +8,21 @@
     <artifactId>algorithms</artifactId>
     <version>1.0</version>
 
+    <repositories>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>bintray-algs4</id>
+            <url>https://dl.bintray.com/algs4/maven</url>
+        </repository>
+    </repositories>
 
+    <dependencies>
+        <dependency>
+            <groupId>edu.princeton.cs</groupId>
+            <artifactId>algs4</artifactId>
+            <version>1.0.4</version>
+        </dependency>
+    </dependencies>
 </project>
