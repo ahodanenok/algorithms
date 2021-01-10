@@ -1,8 +1,9 @@
 package ahodanenok.algs4.ch_1_3;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
-public class Stack<T> {
+public class Stack<T> implements Iterable<T> {
 
     public static final int DEFAULT_INITIAL_CAPACITY = 10;
 
@@ -63,5 +64,24 @@ public class Stack<T> {
         }
 
         this.items = Arrays.copyOf(items, newLength);
+    }
+
+    // modifications during iterations are not checked
+    @Override
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
+
+            private int idx = size - 1;
+
+            @Override
+            public boolean hasNext() {
+                return idx > -1;
+            }
+
+            @Override
+            public T next() {
+                return items[idx--];
+            }
+        };
     }
 }

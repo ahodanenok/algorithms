@@ -1,6 +1,5 @@
 package ahodanenok.algs4.ch_1_3;
 
-import java.util.Iterator;
 import java.util.Scanner;
 
 /**
@@ -19,7 +18,7 @@ public class Copy {
         Stack<String> copy = copy(stack);
 
         System.out.println();
-        for (String str : new StringStackIterable(copy)) {
+        for (String str : copy) {
             System.out.println(str);
         }
     }
@@ -28,39 +27,14 @@ public class Copy {
         Stack<String> copy = new Stack<>();
         Stack<String> buf = new Stack<>();
 
-        for (String str : new StringStackIterable(stack)) {
+        for (String str : stack) {
             buf.push(str);
         }
 
-        for (String str : new StringStackIterable(buf)) {
+        for (String str : buf) {
             copy.push(str);
         }
 
         return copy;
-    }
-
-    private static class StringStackIterable implements Iterable<String> {
-
-        private Stack<String> stack;
-
-        public StringStackIterable(Stack<String> stack) {
-            this.stack = stack;
-        }
-
-        @Override
-        public Iterator<String> iterator() {
-            return new Iterator<String>() {
-
-                @Override
-                public boolean hasNext() {
-                    return stack.size() > 0;
-                }
-
-                @Override
-                public String next() {
-                    return stack.pop();
-                }
-            };
-        }
     }
 }
