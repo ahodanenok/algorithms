@@ -83,4 +83,27 @@ public class ResizingArrayQueueOfStringsTest {
         assertEquals("g", queue.dequeue());
         assertEquals(0, queue.size());
     }
+
+    @Test
+    public void testResize() {
+        ResizingArrayQueueOfStrings queue = new ResizingArrayQueueOfStrings();
+
+        int enqueueCount = ResizingArrayQueueOfStrings.DEFAULT_INITIAL_CAPACITY + 1;
+        for (int i = 0; i < enqueueCount; i++) {
+            queue.enqueue(i + "");
+        }
+
+        int dequeueCount = ResizingArrayQueueOfStrings.DEFAULT_INITIAL_CAPACITY / 2;
+        for (int i = 0; i < dequeueCount; i++) {
+            assertEquals(i + "", queue.dequeue());
+        }
+
+        for (int i = enqueueCount; i < enqueueCount * 2; i++) {
+            queue.enqueue(i + "");
+        }
+
+        for (int i = dequeueCount; i < enqueueCount * 2; i++) {
+            assertEquals(i + "", queue.dequeue());
+        }
+    }
 }
