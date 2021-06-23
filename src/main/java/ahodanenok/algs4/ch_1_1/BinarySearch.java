@@ -16,7 +16,7 @@ public class BinarySearch {
     }
 
     public static int rank(int[] array, int n) {
-        return rank(array, n, 0, array.length, 0);
+        return rank(array, n, 0, array.length - 1, 0);
     }
 
     private static int rank(int[] array, int n, int lo, int hi, int depth) {
@@ -29,7 +29,7 @@ public class BinarySearch {
             System.out.printf("%slo=%d, hi=%d%n", indent, lo, hi);
         }
 
-        if (lo >= hi) {
+        if (lo > hi) {
             return -1;
         }
 

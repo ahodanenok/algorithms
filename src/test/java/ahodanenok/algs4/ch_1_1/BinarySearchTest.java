@@ -51,4 +51,10 @@ public class BinarySearchTest {
     public void testFoundEnd() {
         assertEquals(4, BinarySearch.rank(new int[] { 2, 5, 7, 33, 127 }, 127));
     }
+
+    @Test
+    public void testRightBounded() {
+        int[] array = new int[] { 10, 11, 12, 16, 18, 23, 29, 33, 48, 54, 57, 68, 77, 84, 98 };
+        assertEquals(12, BinarySearch.rank(array, 77));
+    }
 }
