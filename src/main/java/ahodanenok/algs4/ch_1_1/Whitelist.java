@@ -20,6 +20,10 @@ public class Whitelist {
         Mode mode = getMode(args);
 
         Arrays.sort(whitelist);
+
+        // Exercise 1.1.28
+        whitelist = removeDuplicates(whitelist);
+
         while (!StdIn.isEmpty()) {
             int n = StdIn.readInt();
             boolean present = BinarySearch.rank(whitelist, n) >= 0;
@@ -44,5 +48,24 @@ public class Whitelist {
         } else {
             throw new IllegalArgumentException("unknown mode '" + modeArg + "'");
         }
+    }
+
+    /**
+     * Exercise 1.1.28
+     */
+    public static int[] removeDuplicates(int[] array) {
+        if (array.length < 2) {
+            return array;
+        }
+
+        int pos = 0;
+        for (int i = 1; i < array.length; i++) {
+            if (array[pos] != array[i]) {
+                pos++;
+                array[pos] = array[i];
+            }
+        }
+
+        return Arrays.copyOf(array, pos + 1);
     }
 }
