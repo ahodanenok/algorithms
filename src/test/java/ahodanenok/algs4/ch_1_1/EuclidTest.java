@@ -19,6 +19,8 @@ public class EuclidTest {
 
     public static Stream<TestCase> getCases() {
         return Stream.of(
+            new TestCase(0, 5, 5),
+            new TestCase(6, 0, 6),
             new TestCase(1, 1, 1),
             new TestCase(100, 1, 1),
             new TestCase(8, 4, 4),

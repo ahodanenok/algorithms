@@ -15,6 +15,18 @@ public class Euclid {
     }
 
     public static int gcd(int p, int q) {
+        if (p == 0) {
+            return q;
+        }
+
+        if (q == 0) {
+            return p;
+        }
+
+        return _gcd(Math.max(p, q), Math.min(p, q));
+    }
+
+    private static int _gcd(int p, int q) {
         if (DEBUG) {
             System.out.printf("DEBUG: p=%d, q=%d%n", p, q);
         }
