@@ -3,6 +3,7 @@ package ahodanenok.algs4.ch_1_1;
 import edu.princeton.cs.algs4.StdRandom;
 
 import java.util.Arrays;
+import java.util.function.Consumer;
 
 /**
  * Exercise 1.1.36
@@ -13,6 +14,13 @@ public class ShuffleCheck {
         int m = Integer.parseInt(args[0]);
         int n = Integer.parseInt(args[1]);
 
+        Consumer<int[]> shuffle;
+        if ("bad".equals(System.getProperty("shuffle"))) {
+            shuffle = ShuffleCheck::badShuffle;
+        } else {
+            shuffle = ShuffleCheck::shuffle;
+        }
+
         int[] numbers = new int[m];
         int[][] occurrences = new int[numbers.length][numbers.length];
         for (int i = 0; i < n; i++) {
@@ -21,7 +29,7 @@ public class ShuffleCheck {
                 numbers[j] = j;
             }
 
-            shuffle(numbers);
+            shuffle.accept(numbers);
             for (int j = 0; j < numbers.length; j++) {
                 occurrences[numbers[j]][j]++;
             }
@@ -54,6 +62,19 @@ public class ShuffleCheck {
                 System.out.printf("%" + columnWidth + "d", occurrences[row][i]);
             }
             System.out.println();
+        }
+    }
+
+    /**
+     * Exercise 1.1.37
+     */
+    public static void badShuffle(int[] a) {
+        int n = a.length;
+        for (int i = 0; i < n; i++) {
+            int j = StdRandom.uniform(n);
+            int temp = a[i];
+            a[i] = a[j];
+            a[j] = temp;
         }
     }
 
