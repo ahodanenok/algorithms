@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.stream.Stream;
 
 /**
- * Exercise 1.1.32
+ * Book, exercise 1.1.32
  */
 public class HistogramDraw {
 

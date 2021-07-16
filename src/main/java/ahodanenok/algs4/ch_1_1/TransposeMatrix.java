@@ -3,7 +3,7 @@ package ahodanenok.algs4.ch_1_1;
 import java.util.Arrays;
 
 /**
- * Exercise 1.1.13
+ * Book, exercise 1.1.13
  */
 public class TransposeMatrix {
 

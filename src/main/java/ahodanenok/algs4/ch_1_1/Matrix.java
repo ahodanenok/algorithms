@@ -3,7 +3,7 @@ package ahodanenok.algs4.ch_1_1;
 import java.util.stream.IntStream;
 
 /**
- * Exercise 1.1.33
+ * Book, exercise 1.1.33
  */
 public class Matrix {
 

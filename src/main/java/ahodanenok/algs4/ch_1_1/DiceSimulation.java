@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.stream.IntStream;
 
 /**
- * Exercise 1.1.35
+ * Book, exercise 1.1.35
  */
 public class DiceSimulation {
 

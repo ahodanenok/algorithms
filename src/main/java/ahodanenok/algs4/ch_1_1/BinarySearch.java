@@ -3,7 +3,7 @@ package ahodanenok.algs4.ch_1_1;
 import java.util.Arrays;
 
 /**
- * Exercise 1.1.22
+ * Book, exercise 1.1.22
  */
 public class BinarySearch {
 

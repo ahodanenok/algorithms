@@ -6,7 +6,7 @@ import edu.princeton.cs.algs4.StdIn;
 import java.util.Arrays;
 
 /**
- * Exercise 1.1.23
+ * Book, exercise 1.1.23
  */
 public class Whitelist {
 
@@ -21,7 +21,7 @@ public class Whitelist {
 
         Arrays.sort(whitelist);
 
-        // Exercise 1.1.28
+        // Book, exercise 1.1.28
         whitelist = removeDuplicates(whitelist);
 
         while (!StdIn.isEmpty()) {
@@ -51,7 +51,7 @@ public class Whitelist {
     }
 
     /**
-     * Exercise 1.1.28
+     * Book, exercise 1.1.28
      */
     public static int[] removeDuplicates(int[] array) {
         if (array.length < 2) {

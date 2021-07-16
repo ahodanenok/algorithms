@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Exercise 1.1.21
+ * Book, exercise 1.1.21
  */
 public class TabulateAverages {
 

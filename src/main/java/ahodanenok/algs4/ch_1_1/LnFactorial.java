@@ -3,7 +3,7 @@ package ahodanenok.algs4.ch_1_1;
 import java.math.BigInteger;
 
 /**
- * Exercise 1.1.20
+ * Book, exercise 1.1.20
  */
 public class LnFactorial {
 

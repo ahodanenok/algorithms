@@ -1,7 +1,7 @@
 package ahodanenok.algs4.ch_1_1;
 
 /**
- * Exercise 1.1.29
+ * Book, exercise 1.1.29
  */
 public class EqualKeys {
     

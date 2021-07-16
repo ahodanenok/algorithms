@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.function.Consumer;
 
 /**
- * Exercise 1.1.36
+ * Book, exercise 1.1.36
  */
 public class ShuffleCheck {
 
@@ -66,7 +66,7 @@ public class ShuffleCheck {
     }
 
     /**
-     * Exercise 1.1.37
+     * Book, exercise 1.1.37
      */
     public static void badShuffle(int[] a) {
         int n = a.length;

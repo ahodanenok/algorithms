@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Exercise 1.1.31
+ * Book, exercise 1.1.31
  */
 public class RandomConnections {
 

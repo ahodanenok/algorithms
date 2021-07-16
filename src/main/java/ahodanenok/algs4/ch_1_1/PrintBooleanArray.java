@@ -3,7 +3,7 @@ package ahodanenok.algs4.ch_1_1;
 import java.util.Random;
 
 /**
- * Exercise 1.1.11
+ * Book, exercise 1.1.11
  */
 public class PrintBooleanArray {
 

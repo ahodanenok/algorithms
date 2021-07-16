@@ -5,7 +5,7 @@ import edu.princeton.cs.algs4.StdRandom;
 import java.util.Arrays;
 
 /**
- * Exercise 1.1.39
+ * Book, exercise 1.1.39
  */
 public class RandomMatches {
 
