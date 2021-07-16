@@ -15,8 +15,11 @@ public class ShuffleCheck {
         int n = Integer.parseInt(args[1]);
 
         Consumer<int[]> shuffle;
-        if ("bad".equals(System.getProperty("shuffle"))) {
+        String shuffleType = System.getProperty("shuffle");
+        if ("bad".equals(shuffleType)) {
             shuffle = ShuffleCheck::badShuffle;
+        } else if ("sattolo".equals(shuffleType)) {
+            shuffle = Sattolo::cycle;
         } else {
             shuffle = ShuffleCheck::shuffle;
         }
