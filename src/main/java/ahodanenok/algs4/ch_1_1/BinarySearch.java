@@ -1,5 +1,7 @@
 package ahodanenok.algs4.ch_1_1;
 
+import edu.princeton.cs.algs4.Counter;
+
 import java.util.Arrays;
 
 /**
@@ -16,10 +18,17 @@ public class BinarySearch {
     }
 
     public static int rank(int[] array, int n) {
-        return rank(array, n, 0, array.length - 1, 0);
+        return rank(array, n, 0, array.length - 1, 0, null);
     }
 
-    private static int rank(int[] array, int n, int lo, int hi, int depth) {
+    /**
+     * Book, exercise 1.2.9
+     */
+    public static int rank(int[] array, int n, Counter counter) {
+        return rank(array, n, 0, array.length - 1, 0, counter);
+    }
+
+    private static int rank(int[] array, int n, int lo, int hi, int depth, Counter counter) {
         if (DEBUG) {
             String indent = "";
             while (indent.length() < depth) {
@@ -33,11 +42,15 @@ public class BinarySearch {
             return -1;
         }
 
+        if (counter != null) {
+            counter.increment();
+        }
+
         int mid = lo + (hi - lo) / 2;
         if (array[mid] > n) {
-            return rank(array, n, lo, mid - 1, depth + 1);
+            return rank(array, n, lo, mid - 1, depth + 1, counter);
         } else if (array[mid] < n) {
-            return rank(array, n, mid + 1, hi, depth + 1);
+            return rank(array, n, mid + 1, hi, depth + 1, counter);
         } else {
             return mid;
         }
