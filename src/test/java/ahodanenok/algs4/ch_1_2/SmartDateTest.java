@@ -2,8 +2,12 @@ package ahodanenok.algs4.ch_1_2;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestReporter;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -125,4 +129,47 @@ public class SmartDateTest {
         }
     }
 
+    @ParameterizedTest
+    @MethodSource("getDayOfWeekData")
+    public void testDayOfWeek(SmartDate date, String dayOfWeek) {
+        assertEquals(dayOfWeek, date.dayOfWeek());
+    }
+
+    private static Stream<Arguments> getDayOfWeekData() {
+        return Stream.of(
+            Arguments.of(new SmartDate(2021, 1, 1), "Friday"),
+            Arguments.of(new SmartDate(2020, 2, 10), "Monday"),
+            Arguments.of(new SmartDate(2019, 3, 20), "Wednesday"),
+            Arguments.of(new SmartDate(2018, 4, 29), "Sunday"),
+            Arguments.of(new SmartDate(2017, 5, 2), "Tuesday"),
+            Arguments.of(new SmartDate(2016, 6, 10), "Friday"),
+            Arguments.of(new SmartDate(2015, 7, 23), "Thursday"),
+            Arguments.of(new SmartDate(2014, 8, 30), "Saturday"),
+            Arguments.of(new SmartDate(2013, 9, 1), "Sunday"),
+            Arguments.of(new SmartDate(2012, 10, 10), "Wednesday"),
+            Arguments.of(new SmartDate(2011, 11, 18), "Friday"),
+            Arguments.of(new SmartDate(2010, 12, 30), "Thursday"),
+            Arguments.of(new SmartDate(2009, 1, 3), "Saturday"),
+            Arguments.of(new SmartDate(2008, 2, 29), "Friday"),
+            Arguments.of(new SmartDate(2007, 3, 20), "Tuesday"),
+            Arguments.of(new SmartDate(2006, 4, 30), "Sunday"),
+            Arguments.of(new SmartDate(2005, 5, 2), "Monday"),
+            Arguments.of(new SmartDate(2004, 6, 12), "Saturday"),
+            Arguments.of(new SmartDate(2003, 7, 22), "Tuesday"),
+            Arguments.of(new SmartDate(2002, 8, 30), "Friday"),
+            Arguments.of(new SmartDate(2001, 9, 5), "Wednesday"),
+            Arguments.of(new SmartDate(2000, 10, 10), "Tuesday"),
+            Arguments.of(new SmartDate(1999, 11, 20), "Saturday"),
+            Arguments.of(new SmartDate(1953, 12, 31), "Thursday"),
+            Arguments.of(new SmartDate(1952, 1, 1), "Tuesday"),
+            Arguments.of(new SmartDate(1951, 2, 10), "Saturday"),
+            Arguments.of(new SmartDate(1950, 3, 20), "Monday"),
+            Arguments.of(new SmartDate(1949, 4, 29), "Friday"),
+            Arguments.of(new SmartDate(1948, 5, 6), "Thursday"),
+            Arguments.of(new SmartDate(1902, 6, 10), "Tuesday"),
+            Arguments.of(new SmartDate(1901, 7, 20), "Saturday"),
+            Arguments.of(new SmartDate(1900, 8, 30), "Thursday"),
+            Arguments.of(new SmartDate(1899, 9, 1), "Friday"),
+            Arguments.of(new SmartDate(1898, 10, 10), "Monday"));
+    }
 }
