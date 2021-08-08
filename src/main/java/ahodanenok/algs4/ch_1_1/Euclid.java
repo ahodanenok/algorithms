@@ -36,6 +36,6 @@ public class Euclid {
             return q;
         }
 
-        return gcd(q, r);
+        return _gcd(q, r);
     }
 }
