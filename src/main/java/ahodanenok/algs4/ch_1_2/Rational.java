@@ -3,7 +3,7 @@ package ahodanenok.algs4.ch_1_2;
 import ahodanenok.algs4.ch_1_1.Euclid;
 
 /**
- * Book, exercise 1.2.16
+ * Book, exercises 1.2.16, 1.2.17
  */
 public class Rational {
 
@@ -22,6 +22,12 @@ public class Rational {
     public Rational(int numerator, int denominator) {
         if (denominator == 0) {
             throw new IllegalArgumentException("Denominator can't be zero");
+        }
+
+        // sign is stored in numerator and as a consequence Integer.MIN_VALUE can't be the value of denominator
+        // abs(-2147483648) -> -2147483648 because maximum positive int value is 2147483647
+        if (denominator== Integer.MIN_VALUE) {
+            throw new IllegalArgumentException("Overflow, maximum denominator value is " + Integer.MAX_VALUE);
         }
 
         // normalize rational number by excluding common factors
@@ -47,12 +53,12 @@ public class Rational {
 
     public Rational plus(Rational other) {
         CommonDenominator cd = withCommonDenominator(other);
-        return new Rational(cd.thisNumerator + cd.otherNumerator, cd.denominator);
+        return new Rational(toInt((long) cd.thisNumerator + cd.otherNumerator), cd.denominator);
     }
 
     public Rational minus(Rational other) {
         CommonDenominator cd = withCommonDenominator(other);
-        return new Rational(cd.thisNumerator - cd.otherNumerator, cd.denominator);
+        return new Rational(toInt((long) cd.thisNumerator - cd.otherNumerator), cd.denominator);
     }
 
     public Rational times(Rational other) {
@@ -63,10 +69,10 @@ public class Rational {
         int gcdThis = Euclid.gcd(numerator, other.denominator);
         int gcdOther = Euclid.gcd(other.numerator, denominator);
 
-        int n = (numerator / gcdThis) * (other.numerator / gcdOther);
-        int d = (denominator / gcdOther) * (other.denominator / gcdThis);
+        long n = (long) (numerator / gcdThis) * (other.numerator / gcdOther);
+        long d = (long) (denominator / gcdOther) * (other.denominator / gcdThis);
 
-        return new Rational(n, d);
+        return new Rational(toInt(n), toInt(d));
     }
 
     public Rational divides(Rational other) {
@@ -86,16 +92,25 @@ public class Rational {
         return cd.thisNumerator == cd.otherNumerator;
     }
 
-    private int lcm(int a, int b) {
-        return Math.abs(Math.max(a, b) / Euclid.gcd(a, b)) * Math.abs(Math.min(a, b));
+    private long lcm(int a, int b) {
+        return (long) Math.abs(Math.max(a, b) / Euclid.gcd(a, b)) * Math.abs(Math.min(a, b));
     }
 
     private CommonDenominator withCommonDenominator(Rational other) {
-        int commonDenominator = lcm(denominator, other.denominator);
-        int thisNumerator = numerator * (commonDenominator / denominator);
-        int otherNumerator = other.numerator * (commonDenominator / other.denominator);
+        long commonDenominator = lcm(denominator, other.denominator);
+        long thisNumerator = (long) numerator * (commonDenominator / denominator);
+        long otherNumerator = (long) other.numerator * (commonDenominator / other.denominator);
 
-        return new CommonDenominator(thisNumerator, otherNumerator, commonDenominator);
+        return new CommonDenominator(toInt(thisNumerator), toInt(otherNumerator), toInt(commonDenominator));
+    }
+
+    private int toInt(long n) {
+        int result = (int) n;
+        if (n != result) {
+            throw new IllegalStateException("Overflow, n=" + n);
+        }
+
+        return result;
     }
 
     public String toString() {

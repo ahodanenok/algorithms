@@ -25,6 +25,48 @@ public class RationalTest {
         assertEquals(d, r.getDenominator());
     }
 
+    @Test
+    public void testMaxValueDenominator() {
+        Rational r = new Rational(1, Integer.MAX_VALUE);
+        assertEquals(1, r.getNumerator());
+        assertEquals(Integer.MAX_VALUE, r.getDenominator());
+    }
+
+    @Test
+    public void testMaxValueNumerator() {
+        Rational r = new Rational(Integer.MAX_VALUE, 1);
+        assertEquals(Integer.MAX_VALUE, r.getNumerator());
+        assertEquals(1, r.getDenominator());
+    }
+
+    @Test
+    public void testMaxValue() {
+        Rational r = new Rational(Integer.MAX_VALUE, Integer.MAX_VALUE);
+        assertEquals(1, r.getNumerator());
+        assertEquals(1, r.getDenominator());
+    }
+
+    @Test
+    public void testMinValueDenominator() {
+        IllegalArgumentException e = assertThrows(
+                IllegalArgumentException.class, () -> new Rational(1, Integer.MIN_VALUE));
+        assertEquals("Overflow, maximum denominator value is " + Integer.MAX_VALUE, e.getMessage());
+    }
+
+    @Test
+    public void testMinValueNumerator() {
+        Rational r = new Rational(Integer.MIN_VALUE, 1);
+        assertEquals(Integer.MIN_VALUE, r.getNumerator());
+        assertEquals(1, r.getDenominator());
+    }
+
+    @Test
+    public void testMinValue() {
+        IllegalArgumentException e = assertThrows(
+                IllegalArgumentException.class, () -> new Rational(Integer.MIN_VALUE, Integer.MIN_VALUE));
+        assertEquals("Overflow, maximum denominator value is " + Integer.MAX_VALUE, e.getMessage());
+    }
+
     private static Stream<Arguments> getNormalizeData() {
         return Stream.of(
             Arguments.of(1, 2, new Rational(1, 2)),
@@ -64,6 +106,13 @@ public class RationalTest {
     @Test
     public void testToStringNumeratorDenominatorNegative() {
         assertEquals("6/17", new Rational(-6, -17).toString());
+    }
+
+    @Test
+    public void testToStringMinMaxValue() {
+        assertEquals(
+                Integer.MIN_VALUE + "/" + Integer.MAX_VALUE,
+                new Rational(Integer.MIN_VALUE, Integer.MAX_VALUE).toString());
     }
 
     @ParameterizedTest
@@ -107,6 +156,23 @@ public class RationalTest {
             Arguments.of(new Rational(-29, 24), new Rational(-3, 8), new Rational(-5, 6)));
     }
 
+    @Test
+    public void testPlusOverflowMaxValue() {
+        IllegalStateException e = assertThrows(IllegalStateException.class, () -> {
+            new Rational(Integer.MAX_VALUE, 1).plus(new Rational(1, 1));
+        });
+
+        assertEquals("Overflow, n=2147483648", e.getMessage());
+    }
+
+    @Test
+    public void testPlusOverflowMinValue() {
+        IllegalStateException e = assertThrows(IllegalStateException.class, () -> {
+            new Rational(Integer.MIN_VALUE, 1).plus(new Rational(-1, 1));
+        });
+
+        assertEquals("Overflow, n=-2147483649", e.getMessage());
+    }
 
     @ParameterizedTest
     @MethodSource("getMinusData")
@@ -128,6 +194,24 @@ public class RationalTest {
             Arguments.of(new Rational(11, 24), new Rational(-3, 8), new Rational(-5, 6)));
     }
 
+    @Test
+    public void testMinusOverflowMaxValue() {
+        IllegalStateException e = assertThrows(IllegalStateException.class, () -> {
+            new Rational(Integer.MAX_VALUE, 1).minus(new Rational(-1, 1));
+        });
+
+        assertEquals("Overflow, n=2147483648", e.getMessage());
+    }
+
+    @Test
+    public void testMinusOverflowMinValue() {
+        IllegalStateException e = assertThrows(IllegalStateException.class, () -> {
+            new Rational(Integer.MIN_VALUE, 1).plus(new Rational(-1, 1));
+        });
+
+        assertEquals("Overflow, n=-2147483649", e.getMessage());
+    }
+
     @ParameterizedTest
     @MethodSource("getTimesData")
     public void testTimes(Rational expected, Rational a, Rational b) {
@@ -147,6 +231,24 @@ public class RationalTest {
             Arguments.of(new Rational(-12, 55), new Rational(4, 11), new Rational(-3, 5)),
             Arguments.of(new Rational(7, 18), new Rational(-7, 9), new Rational(-1, 2)),
             Arguments.of(new Rational(2, 15), new Rational(14, 27), new Rational(18, 70)));
+    }
+
+    @Test
+    public void testTimesOverflowMaxValue() {
+        IllegalStateException e = assertThrows(IllegalStateException.class, () -> {
+            new Rational(Integer.MAX_VALUE, 1).times(new Rational(2, 1));
+        });
+
+        assertEquals("Overflow, n=4294967294", e.getMessage());
+    }
+
+    @Test
+    public void testTimesOverflowMinValue() {
+        IllegalStateException e = assertThrows(IllegalStateException.class, () -> {
+            new Rational(Integer.MIN_VALUE, 1).times(new Rational(2, 1));
+        });
+
+        assertEquals("Overflow, n=-4294967296", e.getMessage());
     }
 
     @ParameterizedTest
@@ -173,5 +275,23 @@ public class RationalTest {
                 Arguments.of(new Rational(-10, 21), new Rational(-5, 7), new Rational(3, 2)),
                 Arguments.of(new Rational(-15, 8), new Rational(3, 4), new Rational(-2, 5)),
                 Arguments.of(new Rational(15, 22), new Rational(-6, 11), new Rational(-4, 5)));
+    }
+
+    @Test
+    public void testDividesOverflowMaxValue() {
+        IllegalStateException e = assertThrows(IllegalStateException.class, () -> {
+            new Rational(Integer.MAX_VALUE, 1).divides(new Rational(1, 2));
+        });
+
+        assertEquals("Overflow, n=4294967294", e.getMessage());
+    }
+
+    @Test
+    public void testDividesOverflowMinValue() {
+        IllegalStateException e = assertThrows(IllegalStateException.class, () -> {
+            new Rational(Integer.MIN_VALUE, 1).divides(new Rational(1, 2));
+        });
+
+        assertEquals("Overflow, n=-4294967296", e.getMessage());
     }
 }
