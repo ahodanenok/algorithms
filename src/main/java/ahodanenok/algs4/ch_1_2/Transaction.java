@@ -16,8 +16,14 @@ public final class Transaction implements Comparable<Transaction> {
         Transaction t4 = new Transaction("C", new Date(8, 1, 2021), 4);
         Transaction t5 = new Transaction("D", new Date(8, 2, 2021), 5);
         Transaction t6 = new Transaction("E", new Date(8, 5, 2021), 6);
+        Transaction t7 = Transaction.from("F 7/15/2020 12.3");
+        Transaction t8 = Transaction.from("G 8/17/2021 11.99 ");
+        Transaction t9 = Transaction.from("F 7/15/2020 12.3");
 
         List<Transaction> transactions = new ArrayList<>();
+        transactions.add(t9);
+        transactions.add(t8);
+        transactions.add(t7);
         transactions.add(t6);
         transactions.add(t5);
         transactions.add(t4);
@@ -38,6 +44,23 @@ public final class Transaction implements Comparable<Transaction> {
         for (Transaction t : unique) {
             System.out.println(t);
         }
+    }
+
+    /**
+     * Book, exercise 1.2.19
+     */
+    public static Transaction from(String str) {
+        String[] parts = str.trim().split("\\s+");
+        String who = parts[0];
+        double amount = Double.parseDouble(parts[2]);
+
+        String[] dateParts = parts[1].split("/");
+        int month = Integer.parseInt(dateParts[0]);
+        int day = Integer.parseInt(dateParts[1]);
+        int year = Integer.parseInt(dateParts[2]);
+        Date when = new Date(month, day, year);
+
+        return new Transaction(who, when, amount);
     }
 
     private final String who;
