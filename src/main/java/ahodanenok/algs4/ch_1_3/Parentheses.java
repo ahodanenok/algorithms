@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 import java.util.LinkedList;
 
 /**
- * Exercise 1.3.4
+ * Book, exercise 1.3.4
  */
 public class Parentheses {
 

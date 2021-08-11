@@ -1,6 +1,5 @@
 package ahodanenok.algs4.ch_1_3;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -120,5 +119,10 @@ public class ParenthesesTest {
     @Test
     public void testMixed_2() {
         assertFalse(Parentheses.isBalanced("[(])"));
+    }
+
+    @Test
+    public void testMixed_3() {
+        assertTrue(Parentheses.isBalanced("[()]{}{[()()]()}"));
     }
 }
