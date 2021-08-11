@@ -2,7 +2,7 @@ package ahodanenok.algs4.ch_1_3;
 
 public class FixedCapacityStackOfStrings {
 
-    private String[] stack;
+    private final String[] stack;
     private int size;
 
     public FixedCapacityStackOfStrings(int capacity) {
@@ -32,7 +32,7 @@ public class FixedCapacityStackOfStrings {
     }
 
     /**
-     * Exercise 1.3.1
+     * Book, exercise 1.3.1
      */
     public boolean isFull() {
         return size == stack.length;
