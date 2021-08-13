@@ -3,7 +3,7 @@ package ahodanenok.algs4.ch_1_3;
 import java.util.Scanner;
 
 /**
- * Exercise 1.3.12
+ * Book, exercise 1.3.12
  */
 public class Copy {
 
