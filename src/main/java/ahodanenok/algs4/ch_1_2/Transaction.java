@@ -92,7 +92,7 @@ public final class Transaction implements Comparable<Transaction> {
 
     @Override
     public String toString() {
-        return String.format("Transaction { who='%s', when='%s', amount=%f", who, when, amount);
+        return String.format("Transaction { who='%s', when='%s', amount=%f }", who, when, amount);
     }
 
     @Override
