@@ -2,6 +2,7 @@ package ahodanenok.algs4.ch_1_3;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class Stack<T> implements Iterable<T> {
 
@@ -25,7 +26,7 @@ public class Stack<T> implements Iterable<T> {
 
     public T pop() {
         if (size == 0) {
-            throw new IllegalStateException("Stack is empty");
+            throw new NoSuchElementException("Stack is empty");
         }
 
         T item = items[--size];
@@ -44,7 +45,7 @@ public class Stack<T> implements Iterable<T> {
      */
     public T peek() {
         if (size == 0) {
-            throw new IllegalStateException("Stack is empty");
+            throw new NoSuchElementException("Stack is empty");
         }
 
         return items[size - 1];
@@ -54,12 +55,11 @@ public class Stack<T> implements Iterable<T> {
         return size;
     }
 
-    private void resizeItemsArray(int newLength) {
-        if (newLength < 0 && items.length < Integer.MAX_VALUE - 8) {
-            newLength = Integer.MAX_VALUE - 8;
-        }
+    private void resizeItemsArray(int requestedLength) {
+        int newLength = requestedLength < 0 ? Integer.MAX_VALUE - 8 : requestedLength;
 
-        if (newLength < 0) {
+        // can't resize any longer
+        if (requestedLength < 0 && items.length == newLength) {
             throw new IllegalStateException("Stack is too big to handle");
         }
 
