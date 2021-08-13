@@ -2,9 +2,32 @@ package ahodanenok.algs4.ch_1_3;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.NoSuchElementException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ResizingArrayQueueOfStringsTest {
+
+    @Test
+    public void testDequeueEmpty() {
+        ResizingArrayQueueOfStrings queue = new ResizingArrayQueueOfStrings();
+        NoSuchElementException e = assertThrows(NoSuchElementException.class, queue::dequeue);
+        assertEquals("Queue is empty", e.getMessage());
+    }
+
+    @Test
+    public void testDequeueNothingLeft() {
+        ResizingArrayQueueOfStrings queue = new ResizingArrayQueueOfStrings();
+        queue.enqueue("a");
+        queue.enqueue("b");
+        queue.enqueue("c");
+
+        queue.dequeue();
+        queue.dequeue();
+        queue.dequeue();
+        NoSuchElementException e = assertThrows(NoSuchElementException.class, queue::dequeue);
+        assertEquals("Queue is empty", e.getMessage());
+    }
 
     @Test
     public void testAddRemoveSingle() {
@@ -88,12 +111,12 @@ public class ResizingArrayQueueOfStringsTest {
     public void testResize() {
         ResizingArrayQueueOfStrings queue = new ResizingArrayQueueOfStrings();
 
-        int enqueueCount = ResizingArrayQueueOfStrings.DEFAULT_INITIAL_CAPACITY + 1;
+        int enqueueCount = 101;
         for (int i = 0; i < enqueueCount; i++) {
             queue.enqueue(i + "");
         }
 
-        int dequeueCount = ResizingArrayQueueOfStrings.DEFAULT_INITIAL_CAPACITY / 2;
+        int dequeueCount = 50;
         for (int i = 0; i < dequeueCount; i++) {
             assertEquals(i + "", queue.dequeue());
         }

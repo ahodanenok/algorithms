@@ -1,11 +1,12 @@
 package ahodanenok.algs4.ch_1_3;
 
 import java.util.Arrays;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
 /**
- * Exercise 1.3.14
+ * Book, exercise 1.3.14
  */
 public class ResizingArrayQueueOfStrings {
 
@@ -22,10 +23,10 @@ public class ResizingArrayQueueOfStrings {
         }
     }
 
-    public static final int DEFAULT_INITIAL_CAPACITY = 10;
+    private static final int DEFAULT_INITIAL_CAPACITY = 10;
 
     private String[] items;
-    private int offset;
+    private int offset; // in items array where elements start
     private int size;
 
     public ResizingArrayQueueOfStrings() {
@@ -48,6 +49,10 @@ public class ResizingArrayQueueOfStrings {
     }
 
     public String dequeue() {
+        if (size == 0) {
+            throw new NoSuchElementException("Queue is empty");
+        }
+
         String item = items[offset];
         items[offset] = null;
         offset++;
