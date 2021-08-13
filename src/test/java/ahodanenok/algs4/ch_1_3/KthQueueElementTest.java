@@ -10,7 +10,7 @@ public class KthQueueElementTest {
     public void testSingle() {
         ResizingArrayQueueOfStrings queue = new ResizingArrayQueueOfStrings();
         queue.enqueue("1");
-        assertEquals("1", KthQueueElement.kth(queue, 0));
+        assertEquals("1", KthQueueElement.kth(queue, 1));
     }
 
     @Test
@@ -19,7 +19,7 @@ public class KthQueueElementTest {
         queue.enqueue("1");
         queue.enqueue("2");
         queue.enqueue("3");
-        assertEquals("1", KthQueueElement.kth(queue, 2));
+        assertEquals("1", KthQueueElement.kth(queue, 3));
     }
 
     @Test
@@ -28,7 +28,7 @@ public class KthQueueElementTest {
         queue.enqueue("1");
         queue.enqueue("2");
         queue.enqueue("3");
-        assertEquals("2", KthQueueElement.kth(queue, 1));
+        assertEquals("2", KthQueueElement.kth(queue, 2));
     }
 
     @Test
@@ -37,14 +37,14 @@ public class KthQueueElementTest {
         queue.enqueue("1");
         queue.enqueue("2");
         queue.enqueue("3");
-        assertEquals("3", KthQueueElement.kth(queue, 0));
+        assertEquals("3", KthQueueElement.kth(queue, 1));
     }
 
     @Test
     public void testEmpty() {
         ResizingArrayQueueOfStrings queue = new ResizingArrayQueueOfStrings();
         assertThrows(IllegalArgumentException.class, () -> {
-           KthQueueElement.kth(queue, 0);
+           KthQueueElement.kth(queue, 1);
         });
     }
 
@@ -64,7 +64,7 @@ public class KthQueueElementTest {
         queue.enqueue("2");
         queue.enqueue("3");
         assertThrows(IllegalArgumentException.class, () -> {
-            KthQueueElement.kth(queue, 3);
+            KthQueueElement.kth(queue, 4);
         });
     }
 }
