@@ -1,5 +1,7 @@
 package ahodanenok.algs4.ch_1_3;
 
+import java.util.NoSuchElementException;
+
 public class LinkedListMethods {
 
     /**
@@ -20,6 +22,40 @@ public class LinkedListMethods {
             return first;
         } else {
             return null;
+        }
+    }
+
+    /**
+     * Book, exercise 1.3.20
+     */
+    public static <T> Node<T> delete(Node<T> first, int idx) {
+        if (idx < 0) {
+            throw new IllegalArgumentException("Index must be >= 0");
+        }
+
+        if (first == null) {
+            throw new NoSuchElementException("No element at index " + idx);
+        }
+
+        Node<T> prev = null;
+        Node<T> current = first;
+        int currentIdx = 0;
+        while (current.next != null && currentIdx < idx) {
+            prev = current;
+            current = current.next;
+            currentIdx++;
+        }
+
+        if (currentIdx != idx) {
+            throw new NoSuchElementException("No element at index " + idx);
+        }
+
+        if (prev != null) {
+            prev.next = current.next;
+            return first;
+        } else {
+            // first or single element
+            return current.next;
         }
     }
 }
