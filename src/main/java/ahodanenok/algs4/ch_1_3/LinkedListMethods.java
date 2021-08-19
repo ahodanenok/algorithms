@@ -1,6 +1,7 @@
 package ahodanenok.algs4.ch_1_3;
 
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 public class LinkedListMethods {
 
@@ -57,5 +58,21 @@ public class LinkedListMethods {
             // first or single element
             return current.next;
         }
+    }
+
+    /**
+     * Book, exercise 1.3.21
+     */
+    public static boolean find(Node<String> first, String value) {
+        Node<String> current = first;
+        while (current != null) {
+            if (Objects.equals(current.value, value)) {
+                return true;
+            }
+
+            current = current.next;
+        }
+
+        return false;
     }
 }

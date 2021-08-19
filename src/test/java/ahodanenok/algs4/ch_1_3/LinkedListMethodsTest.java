@@ -124,4 +124,54 @@ public class LinkedListMethodsTest {
                 NoSuchElementException.class, () -> LinkedListMethods.delete(Node.list("a", "b", "c", "d", "e"), 5));
         assertEquals("No element at index 5", e.getMessage());
     }
+
+    @Test
+    public void testFindNoElements() {
+        assertFalse(LinkedListMethods.find(null, "a"));
+    }
+
+    @Test
+    public void testFindSingleElementFound() {
+        assertTrue(LinkedListMethods.find(Node.list("a"), "a"));
+    }
+
+    @Test
+    public void testFindSingleElementNotFound() {
+        assertFalse(LinkedListMethods.find(Node.list("b"), "a"));
+    }
+
+    @Test
+    public void testFindTwoElementsFoundFirst() {
+        assertTrue(LinkedListMethods.find(Node.list("c", "d"), "c"));
+    }
+
+    @Test
+    public void testFindTwoElementsFoundSecond() {
+        assertTrue(LinkedListMethods.find(Node.list("c", "d"), "d"));
+    }
+
+    @Test
+    public void testFindTwoElementsNotFound() {
+        assertFalse(LinkedListMethods.find(Node.list("c", "d"), "e"));
+    }
+
+    @Test
+    public void testFindMultipleElementsFoundFirst() {
+        assertTrue(LinkedListMethods.find(Node.list("a", "b", "c", "d", "e"), "a"));
+    }
+
+    @Test
+    public void testFindMultipleElementsFoundMiddle() {
+        assertTrue(LinkedListMethods.find(Node.list("a", "b", "c", "d", "e"), "c"));
+    }
+
+    @Test
+    public void testFindMultipleElementsFoundLast() {
+        assertTrue(LinkedListMethods.find(Node.list("a", "b", "c", "d", "e"), "e"));
+    }
+
+    @Test
+    public void testFindMultipleElementsNotFound() {
+        assertFalse(LinkedListMethods.find(Node.list("a", "b", "c", "d", "e"), "f"));
+    }
 }
