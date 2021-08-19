@@ -119,4 +119,21 @@ public class LinkedListMethods {
 
         return firstNode;
     }
+
+    /**
+     * Book, exercise 1.3.27
+     */
+    public static int max(Node<Integer> node) {
+        int max = 0;
+        Node<Integer> currentNode = node;
+        while (currentNode != null) {
+            if (currentNode.value > max) {
+                max = currentNode.value;
+            }
+
+            currentNode = currentNode.next;
+        }
+
+        return max;
+    }
 }

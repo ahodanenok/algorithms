@@ -353,4 +353,39 @@ public class LinkedListMethodsTest {
         assertEquals("e", list.next.value);
         assertNull(list.next.next);
     }
+
+    @Test
+    public void testMaxNull() {
+        assertEquals(0, LinkedListMethods.max(null));
+    }
+
+    @Test
+    public void testMaxSingleElement() {
+        assertEquals(10, LinkedListMethods.max(Node.list(10)));
+    }
+
+    @Test
+    public void testMaxTwoElementsFirst() {
+        assertEquals(5, LinkedListMethods.max(Node.list(5, 4)));
+    }
+
+    @Test
+    public void testMaxTwoElementsSecond() {
+        assertEquals(5, LinkedListMethods.max(Node.list(4, 5)));
+    }
+
+    @Test
+    public void testMaxMultipleElementsFirst() {
+        assertEquals(4, LinkedListMethods.max(Node.list(4, 3, 2, 1)));
+    }
+
+    @Test
+    public void testMaxMultipleElementsMiddle() {
+        assertEquals(4, LinkedListMethods.max(Node.list(3, 2, 4, 1)));
+    }
+
+    @Test
+    public void testMaxMultipleElementsLast() {
+        assertEquals(4, LinkedListMethods.max(Node.list(1, 2, 3, 4)));
+    }
 }
