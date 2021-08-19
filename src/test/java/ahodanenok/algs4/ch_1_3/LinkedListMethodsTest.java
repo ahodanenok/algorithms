@@ -245,4 +245,112 @@ public class LinkedListMethodsTest {
         assertEquals("c", list.next.next.value);
         assertNull(list.next.next.next);
     }
+
+    @Test
+    public void testRemoveNull() {
+        assertNull(LinkedListMethods.remove(null, "a"));
+    }
+
+    @Test
+    public void testRemoveSingleElementFound() {
+        assertNull(LinkedListMethods.remove(Node.list("a"), "a"));
+    }
+
+    @Test
+    public void testRemoveSingleElementNotFound() {
+        Node<String> list = LinkedListMethods.remove(Node.list("a"), "b");
+        assertEquals("a", list.value);
+        assertNull(list.next);
+    }
+
+    @Test
+    public void testRemoveTwoElementsFirst() {
+        Node<String> list = LinkedListMethods.remove(Node.list("a", "b"), "a");
+        assertEquals("b", list.value);
+        assertNull(list.next);
+    }
+
+    @Test
+    public void testRemoveTwoElementsLast() {
+        Node<String> list = LinkedListMethods.remove(Node.list("a", "b"), "b");
+        assertEquals("a", list.value);
+        assertNull(list.next);
+    }
+
+    @Test
+    public void testRemoveTwoElementsAll() {
+        assertNull(LinkedListMethods.remove(Node.list("b", "b"), "b"));
+    }
+
+    @Test
+    public void testRemoveMultipleElementsFirst() {
+        Node<String> list = LinkedListMethods.remove(Node.list("a", "b", "c", "d", "e"), "a");
+        assertEquals("b", list.value);
+        assertEquals("c", list.next.value);
+        assertEquals("d", list.next.next.value);
+        assertEquals("e", list.next.next.next.value);
+        assertNull(list.next.next.next.next);
+    }
+
+    @Test
+    public void testRemoveMultipleElementsMiddle() {
+        Node<String> list = LinkedListMethods.remove(Node.list("a", "b", "c", "d", "e"), "c");
+        assertEquals("a", list.value);
+        assertEquals("b", list.next.value);
+        assertEquals("d", list.next.next.value);
+        assertEquals("e", list.next.next.next.value);
+        assertNull(list.next.next.next.next);
+    }
+
+    @Test
+    public void testRemoveMultipleElementsLast() {
+        Node<String> list = LinkedListMethods.remove(Node.list("a", "b", "c", "d", "e"), "e");
+        assertEquals("a", list.value);
+        assertEquals("b", list.next.value);
+        assertEquals("c", list.next.next.value);
+        assertEquals("d", list.next.next.next.value);
+        assertNull(list.next.next.next.next);
+    }
+
+    @Test
+    public void testRemoveMultipleElementsFirstLast() {
+        Node<String> list = LinkedListMethods.remove(Node.list("e", "b", "c", "d", "e"), "e");
+        assertEquals("b", list.value);
+        assertEquals("c", list.next.value);
+        assertEquals("d", list.next.next.value);
+        assertNull(list.next.next.next);
+    }
+
+    @Test
+    public void testRemoveMultipleElementsNotFound() {
+        Node<String> list = LinkedListMethods.remove(Node.list("a", "b", "c", "d", "e"), "f");
+        assertEquals("a", list.value);
+        assertEquals("b", list.next.value);
+        assertEquals("c", list.next.next.value);
+        assertEquals("d", list.next.next.next.value);
+        assertEquals("e", list.next.next.next.next.value);
+        assertNull(list.next.next.next.next.next);
+    }
+
+    @Test
+    public void testRemoveMultipleElementsAll() {
+        assertNull(LinkedListMethods.remove(Node.list("a", "a", "a", "a", "a"), "a"));
+    }
+
+    @Test
+    public void testRemoveMultipleElementsSeparated() {
+        Node<String> list = LinkedListMethods.remove(Node.list("a", "b", "c", "b", "e"), "b");
+        assertEquals("a", list.value);
+        assertEquals("c", list.next.value);
+        assertEquals("e", list.next.next.value);
+        assertNull(list.next.next.next);
+    }
+
+    @Test
+    public void testRemoveMultipleElementsFollowing() {
+        Node<String> list = LinkedListMethods.remove(Node.list("a", "b", "b", "b", "e"), "b");
+        assertEquals("a", list.value);
+        assertEquals("e", list.next.value);
+        assertNull(list.next.next);
+    }
 }

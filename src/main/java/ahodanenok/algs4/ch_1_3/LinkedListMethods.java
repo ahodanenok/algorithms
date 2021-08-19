@@ -94,4 +94,29 @@ public class LinkedListMethods {
             node.next = insertedNode;
         }
     }
+
+    /**
+     * Book, exercise 1.3.26
+     */
+    public static Node<String> remove(Node<String> node, String value) {
+        Node<String> firstNode = node;
+        Node<String> previousNode = null;
+        Node<String> currentNode = firstNode;
+        while (currentNode != null) {
+            if (Objects.equals(currentNode.value, value)) {
+                if (previousNode != null) {
+                    previousNode.next = currentNode.next;
+                } else {
+                    // current node is the first
+                    firstNode = firstNode.next;
+                }
+            } else {
+                previousNode = currentNode;
+            }
+
+            currentNode = currentNode.next;
+        }
+
+        return firstNode;
+    }
 }
