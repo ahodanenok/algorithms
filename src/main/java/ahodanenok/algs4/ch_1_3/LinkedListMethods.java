@@ -75,4 +75,13 @@ public class LinkedListMethods {
 
         return false;
     }
+
+    /**
+     * Book, exercise 1.3.24
+     */
+    public static <T> void removeAfter(Node<T> node) {
+        if (node != null && node.next != null) {
+            node.next = node.next.next;
+        }
+    }
 }

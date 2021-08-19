@@ -174,4 +174,34 @@ public class LinkedListMethodsTest {
     public void testFindMultipleElementsNotFound() {
         assertFalse(LinkedListMethods.find(Node.list("a", "b", "c", "d", "e"), "f"));
     }
+
+    @Test
+    public void testRemoveAfterNull() {
+        assertDoesNotThrow(() -> LinkedListMethods.removeAfter(null));
+    }
+
+    @Test
+    public void testRemoveAfterSingleElement() {
+        Node<String> list = Node.list("a");
+        LinkedListMethods.removeAfter(list);
+        assertEquals("a", list.value);
+        assertNull(list.next);
+    }
+
+    @Test
+    public void testRemoveAfterWithNext() {
+        Node<String> list = Node.list("a", "b");
+        LinkedListMethods.removeAfter(list);
+        assertEquals("a", list.value);
+        assertNull(list.next);
+    }
+
+    @Test
+    public void testRemoveAfterWithMultipleNext() {
+        Node<String> list = Node.list("a", "b", "c");
+        LinkedListMethods.removeAfter(list);
+        assertEquals("a", list.value);
+        assertEquals("c", list.next.value);
+        assertNull(list.next.next);
+    }
 }
