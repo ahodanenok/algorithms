@@ -84,4 +84,14 @@ public class LinkedListMethods {
             node.next = node.next.next;
         }
     }
+
+    /**
+     * Book, exercise 1.3.25
+     */
+    public static <T> void insertAfter(Node<T> node, Node<T> insertedNode) {
+        if (node != null && insertedNode != null) {
+            insertedNode.next = node.next;
+            node.next = insertedNode;
+        }
+    }
 }

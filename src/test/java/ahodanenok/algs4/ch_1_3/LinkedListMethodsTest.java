@@ -204,4 +204,45 @@ public class LinkedListMethodsTest {
         assertEquals("c", list.next.value);
         assertNull(list.next.next);
     }
+
+    @Test
+    public void testInsertAfterAllNull() {
+        assertDoesNotThrow(() -> LinkedListMethods.insertAfter(null, null));
+    }
+
+    @Test
+    public void testInsertAfterNodeNull() {
+        Node<String> list = Node.list("a");
+        assertDoesNotThrow(() -> LinkedListMethods.insertAfter(null, list));
+        assertEquals("a", list.value);
+        assertNull(list.next);
+    }
+
+    @Test
+    public void testInsertAfterInsertedNull() {
+        Node<String> list = Node.list("a");
+        assertDoesNotThrow(() -> LinkedListMethods.insertAfter(list, null));
+        assertEquals("a", list.value);
+        assertNull(list.next);
+    }
+
+    @Test
+    public void testInsertAfterFirst() {
+        Node<String> list = Node.list("a", "b");
+        assertDoesNotThrow(() -> LinkedListMethods.insertAfter(list, Node.list("c")));
+        assertEquals("a", list.value);
+        assertEquals("c", list.next.value);
+        assertEquals("b", list.next.next.value);
+        assertNull(list.next.next.next);
+    }
+
+    @Test
+    public void testInsertAfterEnd() {
+        Node<String> list = Node.list("a", "b");
+        assertDoesNotThrow(() -> LinkedListMethods.insertAfter(list.next, Node.list("c")));
+        assertEquals("a", list.value);
+        assertEquals("b", list.next.value);
+        assertEquals("c", list.next.next.value);
+        assertNull(list.next.next.next);
+    }
 }
