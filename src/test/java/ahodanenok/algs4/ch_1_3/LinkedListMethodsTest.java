@@ -423,4 +423,35 @@ public class LinkedListMethodsTest {
     public void testMaxRecursiveMultipleElementsLast() {
         assertEquals(4, LinkedListMethods.maxRecursive(Node.list(1, 2, 3, 4), 0));
     }
+
+    @Test
+    public void testReverseNull() {
+        assertNull(LinkedListMethods.reverse(null));
+    }
+
+    @Test
+    public void testReverseSingleElement() {
+        Node<String> list = LinkedListMethods.reverse(Node.list("a"));
+        assertEquals("a", list.value);
+        assertNull(list.next);
+    }
+
+    @Test
+    public void testReverseTwoElements() {
+        Node<String> list = LinkedListMethods.reverse(Node.list("a", "b"));
+        assertEquals("b", list.value);
+        assertEquals("a", list.next.value);
+        assertNull(list.next.next);
+    }
+
+    @Test
+    public void testReverseMultipleElements() {
+        Node<String> list = LinkedListMethods.reverse(Node.list("a", "b", "c", "d", "e"));
+        assertEquals("e", list.value);
+        assertEquals("d", list.next.value);
+        assertEquals("c", list.next.next.value);
+        assertEquals("b", list.next.next.next.value);
+        assertEquals("a", list.next.next.next.next.value);
+        assertNull(list.next.next.next.next.next);
+    }
 }

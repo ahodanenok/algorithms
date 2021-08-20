@@ -147,4 +147,20 @@ public class LinkedListMethods {
 
         return maxRecursive(node.next, node.value > currentMax ? node.value : currentMax);
     }
+
+    /**
+     * Book, exercise 1.3.30
+     */
+    public static <T> Node<T> reverse(Node<T> node) {
+        Node<T> firstNode = null;
+        Node<T> currentNode = node;
+        while (currentNode != null) {
+            Node<T> nextNode = currentNode.next;
+            currentNode.next = firstNode;
+            firstNode = currentNode;
+            currentNode = nextNode;
+        }
+
+        return firstNode;
+    }
 }
