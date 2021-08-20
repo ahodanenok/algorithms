@@ -388,4 +388,39 @@ public class LinkedListMethodsTest {
     public void testMaxMultipleElementsLast() {
         assertEquals(4, LinkedListMethods.max(Node.list(1, 2, 3, 4)));
     }
+
+    @Test
+    public void testMaxRecursiveNull() {
+        assertEquals(1, LinkedListMethods.maxRecursive(null, 1));
+    }
+
+    @Test
+    public void testMaxRecursiveSingleElement() {
+        assertEquals(10, LinkedListMethods.maxRecursive(Node.list(10), 0));
+    }
+
+    @Test
+    public void testMaxRecursiveTwoElementsFirst() {
+        assertEquals(5, LinkedListMethods.maxRecursive(Node.list(5, 4), 0));
+    }
+
+    @Test
+    public void testMaxRecursiveTwoElementsSecond() {
+        assertEquals(5, LinkedListMethods.maxRecursive(Node.list(4, 5), 0));
+    }
+
+    @Test
+    public void testMaxRecursiveMultipleElementsFirst() {
+        assertEquals(4, LinkedListMethods.maxRecursive(Node.list(4, 3, 2, 1), 0));
+    }
+
+    @Test
+    public void testMaxRecursiveMultipleElementsMiddle() {
+        assertEquals(4, LinkedListMethods.maxRecursive(Node.list(3, 2, 4, 1), 0));
+    }
+
+    @Test
+    public void testMaxRecursiveMultipleElementsLast() {
+        assertEquals(4, LinkedListMethods.maxRecursive(Node.list(1, 2, 3, 4), 0));
+    }
 }

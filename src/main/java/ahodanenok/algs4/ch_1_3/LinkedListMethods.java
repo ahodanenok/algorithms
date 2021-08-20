@@ -136,4 +136,15 @@ public class LinkedListMethods {
 
         return max;
     }
+
+    /**
+     * Book, exercise 1.3.28
+     */
+    public static int maxRecursive(Node<Integer> node, int currentMax) {
+        if (node == null) {
+            return currentMax;
+        }
+
+        return maxRecursive(node.next, node.value > currentMax ? node.value : currentMax);
+    }
 }
