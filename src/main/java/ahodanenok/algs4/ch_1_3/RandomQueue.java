@@ -1,12 +1,13 @@
 package ahodanenok.algs4.ch_1_3;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Random;
 
 /**
  * Book, exercise 1.3.35
  */
-public class RandomQueue<T> {
+public class RandomQueue<T> implements Iterable<T> {
 
     private static final int INITIAL_CAPACITY = 10;
     private static final Random RANDOM = new Random();
@@ -57,5 +58,36 @@ public class RandomQueue<T> {
         if (newCapacity != items.length) {
             items = Arrays.copyOf(items, newCapacity);
         }
+    }
+
+    /**
+     * Book, exercise 1.3.36
+     */
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
+
+            private final T[] iteratorItems;
+            private int idx;
+
+            {
+                iteratorItems = Arrays.copyOf(items, size);
+                for (int i = 0, n = iteratorItems.length; i < n; i++) {
+                    int idx = i + RANDOM.nextInt(n - i);
+                    T tmp = iteratorItems[idx];
+                    iteratorItems[idx] = iteratorItems[i];
+                    iteratorItems[i] = tmp;
+                }
+            }
+
+            @Override
+            public boolean hasNext() {
+                return idx < iteratorItems.length;
+            }
+
+            @Override
+            public T next() {
+                return iteratorItems[idx++];
+            }
+        };
     }
 }

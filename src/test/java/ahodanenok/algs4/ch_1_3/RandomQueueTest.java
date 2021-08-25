@@ -144,4 +144,53 @@ public class RandomQueueTest {
 
         assertEquals(expectedItems, items);
     }
+
+    @Test
+    public void testIteratorWhenEmpty() {
+        RandomQueue<String> queue = new RandomQueue<>();
+        Iterator<String> iterator = queue.iterator();
+        assertFalse(iterator.hasNext());
+    }
+
+    @Test
+    public void testIteratorReturnsAllItems() {
+        RandomQueue<String> queue = new RandomQueue<>();
+        queue.enqueue("a");
+        queue.enqueue("b");
+        queue.enqueue("c");
+        queue.enqueue("d");
+        queue.enqueue("e");
+
+        Set<String> items = new HashSet<>();
+        for (String item : queue) {
+            items.add(item);
+        }
+
+        assertEquals(new HashSet<>(Arrays.asList("a", "b", "c", "d", "e")), items);
+    }
+
+    @RepeatedTest(10)
+    public void testIteratorReturnsRandomPermutations() {
+        List<String> testItems = Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h", "k");
+
+        RandomQueue<String> queue = new RandomQueue<>();
+        for (String item : testItems) {
+            queue.enqueue(item);
+        }
+
+        List<String> permutation1 = new ArrayList<>();
+        for (String item : queue) {
+            permutation1.add(item);
+        }
+
+        List<String> permutation2 = new ArrayList<>();
+        for (String item : queue) {
+            permutation2.add(item);
+        }
+
+        Set<String> expectedItems = new HashSet<>(testItems);
+        assertEquals(expectedItems, new HashSet<>(permutation1));
+        assertEquals(expectedItems, new HashSet<>(permutation2));
+        assertNotEquals(permutation1, permutation2);
+    }
 }
