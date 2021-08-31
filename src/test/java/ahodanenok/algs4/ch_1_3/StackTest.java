@@ -23,6 +23,11 @@ public class StackTest {
             assertEquals(i, stack.pop());
             assertEquals(i - 1, stack.size());
         }
+
+        for (int i = 1; i <= 20; i++) {
+            stack.push(i);
+            assertEquals(i, stack.pop());
+        }
     }
 
     @Test

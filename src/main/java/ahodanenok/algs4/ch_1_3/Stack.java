@@ -6,14 +6,14 @@ import java.util.NoSuchElementException;
 
 public class Stack<T> implements Iterable<T> {
 
-    public static final int DEFAULT_INITIAL_CAPACITY = 10;
+    public static final int INITIAL_CAPACITY = 10;
 
     private T[] items;
     private int size;
 
     @SuppressWarnings("unchecked") // items array is updated only through methods accepting objects of type T
     public Stack() {
-        this.items = (T[]) new Object[DEFAULT_INITIAL_CAPACITY];
+        this.items = (T[]) new Object[INITIAL_CAPACITY];
     }
 
     public void push(T item) {
@@ -34,7 +34,7 @@ public class Stack<T> implements Iterable<T> {
 
         // 3/4 of items array is empty, shrink in half
         if (size <= items.length / 4) {
-            resizeItemsArray(items.length / 2);
+            resizeItemsArray(Math.max(items.length / 2, INITIAL_CAPACITY));
         }
 
         return item;
