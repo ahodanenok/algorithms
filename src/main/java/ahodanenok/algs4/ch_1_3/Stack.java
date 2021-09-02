@@ -21,7 +21,7 @@ public class Stack<T> implements Iterable<T> {
     private int size;
     private final int limit;
 
-    private long changed;
+    private long changesCount;
 
     public Stack() {
         this(INITIAL_CAPACITY, -1);
@@ -30,7 +30,6 @@ public class Stack<T> implements Iterable<T> {
     @SuppressWarnings("unchecked") // items array is updated only through methods accepting objects of type T
     private Stack(int capacity, int limit) {
         this.items = (T[]) new Object[Math.max(capacity, limit)];
-        this.changed = System.currentTimeMillis();
         this.limit = limit;
     }
 
@@ -44,7 +43,7 @@ public class Stack<T> implements Iterable<T> {
         }
 
         items[size++] = item;
-        changed = System.currentTimeMillis();
+        changesCount++;
     }
 
     public T pop() {
@@ -54,7 +53,7 @@ public class Stack<T> implements Iterable<T> {
 
         T item = items[--size];
         items[size] = null;
-        changed = System.currentTimeMillis();
+        changesCount++;
 
         // 3/4 of items array is empty, shrink in half
         if (size <= items.length / 4) {
@@ -95,14 +94,14 @@ public class Stack<T> implements Iterable<T> {
         return new Iterator<T>() {
 
             private int idx = size - 1;
-            private final long created = changed;
+            private final long expectedChangesCount = changesCount;
 
             @Override
             public boolean hasNext() {
-                /**
+                /*
                  * Book, exercise 1.3.50
                  */
-                if (created != changed) {
+                if (expectedChangesCount != changesCount) {
                     throw new ConcurrentModificationException();
                 }
 
@@ -111,7 +110,7 @@ public class Stack<T> implements Iterable<T> {
 
             @Override
             public T next() {
-                if (created != changed) {
+                if (expectedChangesCount != changesCount) {
                     throw new ConcurrentModificationException();
                 }
 
