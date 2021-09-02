@@ -1,6 +1,7 @@
 package ahodanenok.algs4.ch_1_3;
 
 import java.util.Arrays;
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -11,9 +12,12 @@ public class Stack<T> implements Iterable<T> {
     private T[] items;
     private int size;
 
+    private long changed;
+
     @SuppressWarnings("unchecked") // items array is updated only through methods accepting objects of type T
     public Stack() {
         this.items = (T[]) new Object[INITIAL_CAPACITY];
+        this.changed = System.currentTimeMillis();
     }
 
     public void push(T item) {
@@ -22,6 +26,7 @@ public class Stack<T> implements Iterable<T> {
         }
 
         items[size++] = item;
+        changed = System.currentTimeMillis();
     }
 
     public T pop() {
@@ -31,6 +36,7 @@ public class Stack<T> implements Iterable<T> {
 
         T item = items[--size];
         items[size] = null;
+        changed = System.currentTimeMillis();
 
         // 3/4 of items array is empty, shrink in half
         if (size <= items.length / 4) {
@@ -66,20 +72,31 @@ public class Stack<T> implements Iterable<T> {
         this.items = Arrays.copyOf(items, newLength);
     }
 
-    // modifications during iterations are not checked
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
 
             private int idx = size - 1;
+            private final long created = changed;
 
             @Override
             public boolean hasNext() {
+                /**
+                 * Book, exercise 1.3.50
+                 */
+                if (created != changed) {
+                    throw new ConcurrentModificationException();
+                }
+
                 return idx > -1;
             }
 
             @Override
             public T next() {
+                if (created != changed) {
+                    throw new ConcurrentModificationException();
+                }
+
                 return items[idx--];
             }
         };

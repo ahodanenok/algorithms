@@ -2,6 +2,7 @@ package ahodanenok.algs4.ch_1_3;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -131,5 +132,22 @@ public class StackTest {
         assertTrue(iterator.hasNext());
         assertEquals("a", iterator.next());
         assertFalse(iterator.hasNext());
+    }
+
+    @Test
+    public void testIteratorConcurrentModificationError() {
+        Stack<String> stack = new Stack<>();
+        stack.push("a");
+        stack.push("b");
+
+        Iterator<String> iterator = stack.iterator();
+
+        stack.push("c");
+        assertThrows(ConcurrentModificationException.class, iterator::hasNext);
+        assertThrows(ConcurrentModificationException.class, iterator::next);
+
+        stack.pop();
+        assertThrows(ConcurrentModificationException.class, iterator::hasNext);
+        assertThrows(ConcurrentModificationException.class, iterator::next);
     }
 }
