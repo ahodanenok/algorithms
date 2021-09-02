@@ -9,18 +9,36 @@ public class Stack<T> implements Iterable<T> {
 
     public static final int INITIAL_CAPACITY = 10;
 
+    /**
+     * Web, exercise 1.3.2
+     * https://algs4.cs.princeton.edu/13stacks/
+     */
+    public static <T> Stack<T> bounded(int n) {
+        return new Stack<>(n, n);
+    }
+
     private T[] items;
     private int size;
+    private final int limit;
 
     private long changed;
 
-    @SuppressWarnings("unchecked") // items array is updated only through methods accepting objects of type T
     public Stack() {
-        this.items = (T[]) new Object[INITIAL_CAPACITY];
+        this(INITIAL_CAPACITY, -1);
+    }
+
+    @SuppressWarnings("unchecked") // items array is updated only through methods accepting objects of type T
+    private Stack(int capacity, int limit) {
+        this.items = (T[]) new Object[Math.max(capacity, limit)];
         this.changed = System.currentTimeMillis();
+        this.limit = limit;
     }
 
     public void push(T item) {
+        if (size == limit) {
+            throw new RuntimeException("Stack is full");
+        }
+
         if (size == items.length) {
             resizeItemsArray(items.length * 2);
         }

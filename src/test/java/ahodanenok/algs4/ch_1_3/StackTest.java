@@ -150,4 +150,21 @@ public class StackTest {
         assertThrows(ConcurrentModificationException.class, iterator::hasNext);
         assertThrows(ConcurrentModificationException.class, iterator::next);
     }
+
+    @Test
+    public void testBounded() {
+        Stack<Integer> stack = Stack.bounded(15);
+        for (int n = 0; n < 15; n++) {
+            stack.push(n);
+        }
+
+        RuntimeException e = assertThrows(RuntimeException.class, () -> stack.push(100));
+        assertEquals("Stack is full", e.getMessage());
+
+        int n = 14;
+        while (stack.size() > 0) {
+            assertEquals(n, stack.pop());
+            n--;
+        }
+    }
 }
