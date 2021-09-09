@@ -12,6 +12,10 @@ public class Bag<T> implements Iterable<T> {
         items.push(item);
     }
 
+    public int size() {
+        return items.size();
+    }
+
     public boolean isEmpty() {
         return items.size() == 0;
     }
