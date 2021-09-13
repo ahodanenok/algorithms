@@ -1,6 +1,7 @@
 package ahodanenok.algs4.ch_1_3;
 
 import java.util.Iterator;
+import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 /**
@@ -104,6 +105,92 @@ public class ResizingArrayDeque<T> implements Deque<T> {
             @Override
             public T next() {
                 return items[idx++];
+            }
+        };
+    }
+
+    /**
+     * Web, exercise 1.3.21
+     * https://algs4.cs.princeton.edu/13stacks/
+     */
+    public ListIterator<T> listIterator() {
+        return new ListIterator<T>() {
+
+            private int nextIdx = offset;
+            private int lastIdx = -1;
+            private int end = offset + size;
+
+            @Override
+            public boolean hasNext() {
+                return nextIdx < end;
+            }
+
+            @Override
+            public T next() {
+                T item = items[nextIdx];
+                lastIdx = nextIdx;
+                nextIdx++;
+
+                return item;
+            }
+
+            @Override
+            public boolean hasPrevious() {
+                return nextIdx > offset;
+            }
+
+            @Override
+            public T previous() {
+                nextIdx--;
+                lastIdx = nextIdx;
+
+                return items[nextIdx];
+            }
+
+            @Override
+            public int nextIndex() {
+                return nextIdx - offset;
+            }
+
+            @Override
+            public int previousIndex() {
+                return nextIdx - offset - 1;
+            }
+
+            @Override
+            public void remove() {
+                if (lastIdx < offset || lastIdx >= end) {
+                    throw new IllegalStateException();
+                }
+
+                end--;
+                System.arraycopy(items, lastIdx + 1, items, lastIdx, end - lastIdx);
+                items[end] = null;
+                if (nextIdx > lastIdx) {
+                    nextIdx--;
+                }
+                lastIdx = -1;
+                size--;
+            }
+
+            @Override
+            public void set(T item) {
+                if (lastIdx < offset || lastIdx >= end) {
+                    throw new IllegalStateException();
+                }
+
+                items[lastIdx] = item;
+            }
+
+            @Override
+            public void add(T item) {
+                resizeArrayIfNeeded();
+                System.arraycopy(items, nextIdx, items, nextIdx + 1, end - nextIdx);
+                items[nextIdx] = item;
+                nextIdx++;
+                lastIdx = -1;
+                end++;
+                size++;
             }
         };
     }
