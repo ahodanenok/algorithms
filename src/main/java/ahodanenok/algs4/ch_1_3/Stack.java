@@ -1,9 +1,6 @@
 package ahodanenok.algs4.ch_1_3;
 
-import java.util.Arrays;
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 public class Stack<T> implements Iterable<T> {
 
@@ -72,6 +69,18 @@ public class Stack<T> implements Iterable<T> {
         }
 
         return items[size - 1];
+    }
+
+    /**
+     * Web, exercise 1.3.24
+     * https://algs4.cs.princeton.edu/13stacks/
+     */
+    public void replaceAll(T from, T to) {
+        for (int i = 0; i < size; i++) {
+            if (Objects.equals(items[i], from)) {
+                items[i] = to;
+            }
+        }
     }
 
     public int size() {

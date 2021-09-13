@@ -167,4 +167,39 @@ public class StackTest {
             n--;
         }
     }
+
+    @Test
+    public void testReplaceAll() {
+        Stack<String> stack = new Stack<>();
+
+        stack.replaceAll("a", "b");
+        assertEquals(0, stack.size());
+
+        stack.push("a");
+        stack.replaceAll("a", "b");
+        assertEquals(1, stack.size());
+        assertEquals("b", stack.pop());
+
+        stack.push("c");
+        stack.push("d");
+        stack.push("c");
+        stack.replaceAll("d", "f");
+        assertEquals(3, stack.size());
+        assertEquals("c", stack.pop());
+        assertEquals("f", stack.pop());
+        assertEquals("c", stack.pop());
+
+        stack.push("k");
+        stack.push("g");
+        stack.push("k");
+        stack.push("h");
+        stack.push("k");
+        stack.replaceAll("k", "X");
+        assertEquals(5, stack.size());
+        assertEquals("X", stack.pop());
+        assertEquals("h", stack.pop());
+        assertEquals("X", stack.pop());
+        assertEquals("g", stack.pop());
+        assertEquals("X", stack.pop());
+    }
 }
