@@ -12,6 +12,16 @@ public class Bag<T> implements Iterable<T> {
         items.push(item);
     }
 
+    /**
+     * Web, exercise 1.3.23
+     * https://algs4.cs.princeton.edu/13stacks/
+     */
+    public void addAll(Bag<T> other) {
+        for (T item : other) {
+            add(item);
+        }
+    }
+
     public int size() {
         return items.size();
     }
