@@ -46,7 +46,7 @@ public class Concatenation {
 
     @SafeVarargs
     public static <T> Steque<T> concatenateSteques(Steque<T>... steques) {
-        Steque<T> result = new Steque<>();
+        Steque<T> result = new LinkedListSteque<>();
         for (Steque<T> s : steques) {
             while (s.size() > 0) {
                 result.enqueue(s.pop());

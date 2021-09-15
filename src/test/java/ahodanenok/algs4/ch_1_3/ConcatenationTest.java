@@ -193,7 +193,7 @@ public class ConcatenationTest {
 
         @SafeVarargs
         private final <T> Steque<T> stequeOf(T... items) {
-            Steque<T> steque = new Steque<>();
+            Steque<T> steque = new LinkedListSteque<>();
             for (T item : items) {
                 steque.enqueue(item);
             }
