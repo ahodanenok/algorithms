@@ -4,6 +4,9 @@ import java.util.NoSuchElementException;
 
 /**
  * Book, exercise 1.3.48
+ *
+ * Web, exercise 1.3.34
+ * https://algs4.cs.princeton.edu/13stacks/
  */
 public class TwoStacks<T> {
 
