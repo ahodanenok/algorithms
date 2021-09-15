@@ -4,6 +4,9 @@ import java.util.NoSuchElementException;
 
 /**
  * Book, exercise 1.3.49
+ *
+ * Web, exercise 1.3.31
+ * https://algs4.cs.princeton.edu/13stacks/
  */
 public class StacksQueue<T> {
 
