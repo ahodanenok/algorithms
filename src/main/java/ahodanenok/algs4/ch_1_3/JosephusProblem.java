@@ -6,6 +6,9 @@ import java.util.stream.Collectors;
 
 /**
  * Book, exercise 1.3.37
+ *
+ * Web, exercise 1.3.27
+ * https://algs4.cs.princeton.edu/13stacks/
  */
 public class JosephusProblem {
 
