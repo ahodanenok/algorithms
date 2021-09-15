@@ -4,6 +4,9 @@ import java.util.NoSuchElementException;
 
 /**
  * Book, exercise 1.3.29
+ *
+ * Web, exercise 1.3.29
+ * https://algs4.cs.princeton.edu/13stacks/
  */
 public class CircularListQueue<T> {
 
