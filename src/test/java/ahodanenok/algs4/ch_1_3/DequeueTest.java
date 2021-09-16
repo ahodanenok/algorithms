@@ -28,6 +28,11 @@ public class DequeueTest {
         );
     }
 
+    @TestFactory
+    public Stream<DynamicTest> testDequeWithStackSteque() {
+        return createTests(DequeWithStackSteque::new);
+    }
+
     public Stream<DynamicTest> createTests(Supplier<Deque<String>> dequeInstance) {
         return Stream.of(
             dynamicTest("testSizeWhenEmpty", () -> testSizeWhenEmpty(dequeInstance)),
