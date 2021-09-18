@@ -1,6 +1,7 @@
 package ahodanenok.algs4.ch_1_3;
 
 import org.junit.jupiter.api.DynamicTest;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestFactory;
 
 import java.util.Iterator;
@@ -31,6 +32,11 @@ public class DequeueTest {
     @TestFactory
     public Stream<DynamicTest> testDequeWithStackSteque() {
         return createTests(DequeWithStackSteque::new);
+    }
+
+    @TestFactory
+    public Stream<DynamicTest> testDequeThreeStacks() {
+        return createTests(DequeThreeStacks::new);
     }
 
     public Stream<DynamicTest> createTests(Supplier<Deque<String>> dequeInstance) {
