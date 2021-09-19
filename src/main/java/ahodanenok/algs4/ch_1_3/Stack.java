@@ -61,6 +61,23 @@ public class Stack<T> implements Iterable<T> {
     }
 
     /**
+     * Web, exercise 1.3.50
+     * https://algs4.cs.princeton.edu/13stacks/
+     */
+    public List<T> multiPop(int count) {
+        if (count > size()) {
+            throw new IllegalStateException("Not enough items");
+        }
+
+        List<T> result = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            result.add(pop());
+        }
+
+        return result;
+    }
+
+    /**
      * Book, exercise 1.3.7
      */
     public T peek() {

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -271,5 +272,35 @@ public class StackTest {
         assertEquals("d", stack.pop());
         assertEquals("a", stack.pop());
         assertEquals(0, stack.size());
+    }
+
+    @Test
+    public void testMultiPop() {
+        Stack<String> stack = new Stack<>();
+
+        IllegalStateException e1 = assertThrows(IllegalStateException.class, () -> stack.multiPop(1));
+        assertEquals("Not enough items", e1.getMessage());
+
+        stack.push("a");
+        stack.push("b");
+        stack.push("c");
+        stack.push("d");
+        stack.push("e");
+
+        IllegalStateException e2 = assertThrows(IllegalStateException.class, () -> stack.multiPop(6));
+        assertEquals("Not enough items", e2.getMessage());
+
+        List<String> items1 = stack.multiPop(3);
+        assertEquals(2, stack.size());
+        assertEquals(3, items1.size());
+        assertEquals("e", items1.get(0));
+        assertEquals("d", items1.get(1));
+        assertEquals("c", items1.get(2));
+
+        List<String> items2 = stack.multiPop(2);
+        assertEquals(0, stack.size());
+        assertEquals(2, items2.size());
+        assertEquals("b", items2.get(0));
+        assertEquals("a", items2.get(1));
     }
 }
