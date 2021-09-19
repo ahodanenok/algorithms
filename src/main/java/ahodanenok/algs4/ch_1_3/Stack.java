@@ -106,6 +106,10 @@ public class Stack<T> implements Iterable<T> {
         push(b);
     }
 
+    /**
+     * Web, exercise 1.3.49
+     * https://algs4.cs.princeton.edu/13stacks/
+     */
     public int size() {
         return size;
     }
