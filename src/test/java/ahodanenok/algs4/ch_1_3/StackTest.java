@@ -231,4 +231,45 @@ public class StackTest {
         assertEquals("a", stack.pop());
         assertEquals(0, stack.size());
     }
+
+    @Test
+    public void testExch() {
+        Stack<String> stack = new Stack<>();
+
+        IllegalStateException e1 = assertThrows(IllegalStateException.class, stack::exch);
+        assertEquals("Exch requires at least two items in the stack", e1.getMessage());
+
+        stack.push("a");
+
+        IllegalStateException e2 = assertThrows(IllegalStateException.class, stack::exch);
+        assertEquals("Exch requires at least two items in the stack", e2.getMessage());
+
+        stack.push("b");
+        stack.exch();
+        assertEquals(2, stack.size());
+        assertEquals("a", stack.pop());
+        assertEquals("b", stack.pop());
+        assertEquals(0, stack.size());
+
+        stack.push("a");
+        stack.push("b");
+        stack.push("c");
+        stack.push("d");
+        stack.exch();
+        assertEquals(4, stack.size());
+        assertEquals("c", stack.pop());
+
+        stack.exch();
+        assertEquals(3, stack.size());
+        assertEquals("b", stack.pop());
+
+        stack.exch();
+        assertEquals(2, stack.size());
+        assertEquals("a", stack.peek());
+
+        stack.exch();
+        assertEquals("d", stack.pop());
+        assertEquals("a", stack.pop());
+        assertEquals(0, stack.size());
+    }
 }

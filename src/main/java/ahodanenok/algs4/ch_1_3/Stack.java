@@ -91,6 +91,21 @@ public class Stack<T> implements Iterable<T> {
         push(peek());
     }
 
+    /**
+     * Web, exercise 1.3.48
+     * https://algs4.cs.princeton.edu/13stacks/
+     */
+    public void exch() {
+        if (size() < 2) {
+            throw new IllegalStateException("Exch requires at least two items in the stack");
+        }
+
+        T a = pop();
+        T b = pop();
+        push(a);
+        push(b);
+    }
+
     public int size() {
         return size;
     }
