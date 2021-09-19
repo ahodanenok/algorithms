@@ -142,4 +142,34 @@ public class CircularListQueueTest {
         assertEquals(100, queue.peek());
         assertEquals(2, queue.size());
     }
+
+    @Test
+    public void testToArray() {
+        CircularListQueue<String> queue = new CircularListQueue<>();
+
+        String[] array1 = queue.toArray(String.class);
+        assertEquals(0, array1.length);
+
+        queue.enqueue("a");
+        String[] array2 = queue.toArray(String.class);
+        assertEquals(1, array2.length);
+        assertEquals("a", array2[0]);
+
+        queue.enqueue("b");
+        queue.enqueue("c");
+        queue.enqueue("d");
+        String[] array3 = queue.toArray(String.class);
+        assertEquals(4, array3.length);
+        assertEquals("a", array3[0]);
+        assertEquals("b", array3[1]);
+        assertEquals("c", array3[2]);
+        assertEquals("d", array3[3]);
+
+        queue.dequeue();
+        String[] array4 = queue.toArray(String.class);
+        assertEquals(3, array4.length);
+        assertEquals("b", array4[0]);
+        assertEquals("c", array4[1]);
+        assertEquals("d", array4[2]);
+    }
 }
