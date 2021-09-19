@@ -9,6 +9,9 @@ import java.util.Comparator;
 
 /**
  * Book, exercise 1.3.43
+ *
+ * Web, exercise 1.3.40
+ * https://algs4.cs.princeton.edu/13stacks/
  */
 public class ListingFiles {
 
