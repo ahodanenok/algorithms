@@ -83,6 +83,14 @@ public class Stack<T> implements Iterable<T> {
         }
     }
 
+    /**
+     * Web, exercise 1.3.47
+     * https://algs4.cs.princeton.edu/13stacks/
+     */
+    public void dup() {
+        push(peek());
+    }
+
     public int size() {
         return size;
     }

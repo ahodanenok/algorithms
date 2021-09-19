@@ -202,4 +202,33 @@ public class StackTest {
         assertEquals("g", stack.pop());
         assertEquals("X", stack.pop());
     }
+
+    @Test
+    public void testDup() {
+        Stack<String> stack = new Stack<>();
+
+        NoSuchElementException e = assertThrows(NoSuchElementException.class, stack::dup);
+        assertEquals("Stack is empty", e.getMessage());
+
+        stack.push("a");
+        stack.dup();
+        assertEquals(2, stack.size());
+        assertEquals("a", stack.pop());
+        assertEquals("a", stack.pop());
+        assertEquals(0, stack.size());
+
+        stack.push("a");
+        stack.push("b");
+        stack.push("c");
+        stack.dup();
+        assertEquals(4, stack.size());
+        stack.dup();
+        assertEquals(5, stack.size());
+        assertEquals("c", stack.pop());
+        assertEquals("c", stack.pop());
+        assertEquals("c", stack.pop());
+        assertEquals("b", stack.pop());
+        assertEquals("a", stack.pop());
+        assertEquals(0, stack.size());
+    }
 }
