@@ -76,4 +76,18 @@ public class CircularListQueue<T> {
 
         return result;
     }
+
+    /**
+     * Web, exercise 1.3.52
+     * https://algs4.cs.princeton.edu/13stacks/
+     */
+    public void reverse() {
+        if (size == 0) {
+            return;
+        }
+
+        T item = dequeue();
+        reverse();
+        enqueue(item);
+    }
 }

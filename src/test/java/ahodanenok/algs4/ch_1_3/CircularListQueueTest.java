@@ -172,4 +172,26 @@ public class CircularListQueueTest {
         assertEquals("c", array4[1]);
         assertEquals("d", array4[2]);
     }
+
+    @Test
+    public void testReverse() {
+        CircularListQueue<String> queue = new CircularListQueue<>();
+
+        assertDoesNotThrow(queue::reverse);
+
+        queue.enqueue("a");
+        queue.reverse();
+        assertEquals(1, queue.size());
+        assertEquals("a", queue.peek());
+
+        queue.enqueue("b");
+        queue.enqueue("c");
+        queue.enqueue("d");
+        queue.reverse();
+        assertEquals(4, queue.size());
+        assertEquals("d", queue.dequeue());
+        assertEquals("c", queue.dequeue());
+        assertEquals("b", queue.dequeue());
+        assertEquals("a", queue.dequeue());
+    }
 }
