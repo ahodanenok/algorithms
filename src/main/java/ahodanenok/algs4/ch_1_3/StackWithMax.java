@@ -2,6 +2,7 @@ package ahodanenok.algs4.ch_1_3;
 
 /**
  * Web, exercise 1.3.5
+ * Web, exercise 1.3.58
  * https://algs4.cs.princeton.edu/13stacks/
  */
 public class StackWithMax<T extends Comparable<T>> {
