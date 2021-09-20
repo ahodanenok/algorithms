@@ -7,6 +7,7 @@ import java.util.Map;
  * Book, exercise 1.3.10
  *
  * Web, exercise 1.3.15
+ * Web, exercise 1.3.60
  * https://algs4.cs.princeton.edu/13stacks/
  */
 public class InfixToPostfix {
