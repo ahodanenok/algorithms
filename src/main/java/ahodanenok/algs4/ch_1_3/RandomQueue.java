@@ -6,6 +6,9 @@ import java.util.Random;
 
 /**
  * Book, exercise 1.3.35
+ *
+ * Web, exercise 1.3.61
+ * https://algs4.cs.princeton.edu/13stacks/
  */
 public class RandomQueue<T> implements Iterable<T> {
 
