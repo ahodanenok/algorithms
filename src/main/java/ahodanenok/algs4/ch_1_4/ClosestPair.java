@@ -2,12 +2,12 @@ package ahodanenok.algs4.ch_1_4;
 
 import java.util.Arrays;
 
+import static ahodanenok.algs4.ch_1_4.Pair.INFINITY;
+
 /**
  * Book, exercise 1.4.16
  */
 public class ClosestPair {
-
-    private static final Pair INFINITY = new Pair(0, Double.POSITIVE_INFINITY);
 
     public static Pair find(double[] numbers) {
         Arrays.sort(numbers);
@@ -39,33 +39,6 @@ public class ClosestPair {
             return left;
         } else {
             return right;
-        }
-    }
-
-    public static class Pair {
-
-        final double a;
-        final double b;
-
-        public Pair(double a, double b) {
-            this.a = a;
-            this.b = b;
-        }
-
-        public double distance() {
-            return Math.abs(a - b);
-        }
-
-        @Override
-        // hashCode not needed here
-        public boolean equals(Object obj) {
-            Pair other = (Pair) obj;
-            return a == other.a && b == other.b;
-        }
-
-        @Override
-        public String toString() {
-            return "(" + a + ", " + b + ")";
         }
     }
 }
