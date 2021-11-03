@@ -8,6 +8,8 @@ import java.util.NoSuchElementException;
 /**
  * Web, exercise 1.3.36
  * https://algs4.cs.princeton.edu/13stacks/
+ *
+ * Book, exercise 1.4.30
  */
 public class DequeWithStackSteque<T> implements Deque<T> {
 
