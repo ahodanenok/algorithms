@@ -7,6 +7,8 @@ import java.util.NoSuchElementException;
  *
  * Web, exercise 1.3.31
  * https://algs4.cs.princeton.edu/13stacks/
+ *
+ * Book, exercise 1.4.27
  */
 public class StacksQueue<T> {
 
