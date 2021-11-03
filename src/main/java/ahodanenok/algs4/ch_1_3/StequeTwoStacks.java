@@ -5,6 +5,8 @@ import java.util.NoSuchElementException;
 /**
  * Web, exercise 1.3.35
  * https://algs4.cs.princeton.edu/13stacks/
+ *
+ * Book, exercise 1.4.29
  */
 public class StequeTwoStacks<T> implements Steque<T> {
 
