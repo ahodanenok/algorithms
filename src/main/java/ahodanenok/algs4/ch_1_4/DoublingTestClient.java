@@ -14,8 +14,17 @@ public class DoublingTestClient {
 
     private final List<Algorithm> algorithms;
 
+    /**
+     * Book, exercise 1.4.39
+     */
+    private int trialsPerInputSize = 1;
+
     public DoublingTestClient() {
         this.algorithms = new ArrayList<>();
+    }
+
+    public void setTrialsPerInputSize(int trialsPerInputSize) {
+        this.trialsPerInputSize = trialsPerInputSize;
     }
 
     public void addAlgorithm(Algorithm algorithm) {
@@ -37,12 +46,17 @@ public class DoublingTestClient {
             System.out.printf("%10d", inputSize);
             for (int i = 0; i < algorithms.size(); i++) {
                 Algorithm alg = algorithms.get(i);
-                long time = alg.execute(inputSize);
+                long time = 0;
 
-                double ratio = prevTime[i] > 0 ? (double) time / prevTime[i] : 1;
-                System.out.printf(" | %15s", String.format("%5d (%.1f)", time, ratio));
+                for (int t = 0; t < trialsPerInputSize; t++) {
+                    time += alg.execute(inputSize);
+                }
 
-                prevTime[i] = time;
+                long avgTime = time / trialsPerInputSize;
+                double ratio = prevTime[i] > 0 ? (double) avgTime / prevTime[i] : 1;
+                System.out.printf(" | %15s", String.format("%5d (%.1f)", avgTime, ratio));
+
+                prevTime[i] = avgTime;
             }
 
             inputSize *= 2;

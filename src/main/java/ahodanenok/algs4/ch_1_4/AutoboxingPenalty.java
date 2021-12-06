@@ -7,6 +7,7 @@ public class AutoboxingPenalty {
 
     public static void main(String[] args) {
         DoublingTestClient doublingTest = new DoublingTestClient();
+        doublingTest.setTrialsPerInputSize(10);
         doublingTest.addAlgorithm(new DoublingTestClient.Algorithm() {
             @Override
             public String getName() {
