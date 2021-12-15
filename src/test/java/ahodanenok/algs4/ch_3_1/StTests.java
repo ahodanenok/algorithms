@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public abstract class StTests {
 
-    protected abstract <K, V> ST<K, V> createST(int capacity);
+    protected abstract <K extends Comparable<K>, V> ST<K, V> createST(int capacity);
 
     protected boolean isCapacityBounded() {
         return false;
