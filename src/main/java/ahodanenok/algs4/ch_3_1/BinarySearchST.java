@@ -25,16 +25,13 @@ public class BinarySearchST<K extends Comparable<K>, V> implements ST<K, V> {
 
     @Override
     public void put(K key, V value) {
-        int idx = rank(key);
-        if (value == null && idx < 0) {
+        if (value == null) {
+            delete(key);
             return;
         }
 
-        if (value == null) {
-            System.arraycopy(items, idx + 1, items, idx, size - idx - 1);
-            size--;
-            items[size] = null;
-        } else if (idx < 0) {
+        int idx = rank(key);
+        if (idx < 0) {
             if (size == items.length) {
                 throw new IllegalStateException("ST is full");
             }
@@ -46,6 +43,20 @@ public class BinarySearchST<K extends Comparable<K>, V> implements ST<K, V> {
         } else {
             items[idx].value = value;
         }
+    }
+
+    /**
+     * Book, exercise 3.1.16
+     */
+    private void delete(K key) {
+        int idx = rank(key);
+        if (idx < 0) {
+            return;
+        }
+
+        System.arraycopy(items, idx + 1, items, idx, size - idx - 1);
+        size--;
+        items[size] = null;
     }
 
     private int rank(K key) {
