@@ -17,12 +17,19 @@ public class FrequencyCounter {
             minLength = 1;
         }
 
+        // Book, exercise 3.1.9
+        int processedCount = 0;
+        String lastPut = null;
+
         Map<String, Integer> frequencies = new HashMap<>();
         while (!StdIn.isEmpty()) {
             String word = StdIn.readString();
             if (word.length() >= minLength) {
                 frequencies.merge(word, 1, Integer::sum);
+                lastPut = word;
             }
+
+            processedCount++;
         }
 
         String mostFrequent = frequencies.keySet().iterator().next();
@@ -33,5 +40,7 @@ public class FrequencyCounter {
         }
 
         System.out.println(mostFrequent);
+        System.out.println("processed count = " + processedCount);
+        System.out.println("last word put = " + lastPut);
     }
 }
