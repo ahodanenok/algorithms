@@ -1,5 +1,6 @@
 package ahodanenok.algs4.ch_3_1;
 
+import ahodanenok.algs4.ch_1_3.Stack;
 import edu.princeton.cs.algs4.StdIn;
 
 import java.util.HashMap;
@@ -32,14 +33,26 @@ public class FrequencyCounter {
             processedCount++;
         }
 
-        String mostFrequent = frequencies.keySet().iterator().next();
-        for (Map.Entry<String, Integer> entry : frequencies.entrySet()) {
-            if (entry.getValue() > frequencies.get(mostFrequent)) {
-                mostFrequent = entry.getKey();
+        int highestFrequency = Integer.MIN_VALUE;
+        for (Integer fq : frequencies.values()) {
+            if (fq > highestFrequency) {
+                highestFrequency = fq;
             }
         }
 
-        System.out.println(mostFrequent);
+        // Book, exercise 3.1.19
+        Stack<String> mostFrequent = new Stack<>();
+        for (Map.Entry<String, Integer> entry : frequencies.entrySet()) {
+            if (entry.getValue() == highestFrequency) {
+                mostFrequent.push(entry.getKey());
+            }
+        }
+
+        for (String w : mostFrequent) {
+            System.out.println(w);
+        }
+
+        System.out.println();
         System.out.println("processed count = " + processedCount);
         System.out.println("last word put = " + lastPut);
     }
