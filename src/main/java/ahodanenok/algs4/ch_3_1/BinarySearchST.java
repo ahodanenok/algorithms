@@ -23,6 +23,18 @@ public class BinarySearchST<K extends Comparable<K>, V> implements ST<K, V> {
         return items[idx].value;
     }
 
+    /**
+     * Book, exercise 3.1.17
+     */
+    public V floor(K key) {
+        int idx = Math.abs(rank(key) + 1) - 1;
+        if (idx < 0) {
+            return null;
+        }
+
+        return items[idx].value;
+    }
+
     @Override
     public void put(K key, V value) {
         if (value == null) {
