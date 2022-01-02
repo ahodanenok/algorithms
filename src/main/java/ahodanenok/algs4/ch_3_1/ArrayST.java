@@ -21,7 +21,21 @@ public class ArrayST<K, V> implements ST<K, V> {
     public V get(K key) {
         Objects.requireNonNull(key, "Key is null");
         int idx = indexOf(key);
-        return idx != -1 ? values[idx] : null;
+
+        if (idx == -1) {
+            return null;
+        }
+
+        V value = values[idx];
+
+        // Book, exercise 3.1.22
+        System.arraycopy(keys, 0, keys, 1, idx);
+        keys[0] = key;
+
+        System.arraycopy(values, 0, values, 1, idx);
+        values[0] = value;
+
+        return value;
     }
 
     @Override
