@@ -8,6 +8,11 @@ public class BinarySearchST<K extends Comparable<K>, V> implements ST<K, V> {
     private final Item<K, V>[] items;
     private int size;
 
+    /**
+     * Book, exercise 3.1.25
+     */
+    private Item<K, V> lastAccessed;
+
     @SuppressWarnings("unchecked")
     public BinarySearchST(int capacity) {
         items = new Item[capacity];
@@ -15,12 +20,19 @@ public class BinarySearchST<K extends Comparable<K>, V> implements ST<K, V> {
 
     @Override
     public V get(K key) {
+        if (lastAccessed != null && lastAccessed.key.compareTo(key) == 0) {
+            return lastAccessed.value;
+        }
+
         int idx = rank(key);
         if (idx < 0) {
             return null;
         }
 
-        return items[idx].value;
+        Item<K, V> item = items[idx];
+        lastAccessed = item;
+
+        return item.value;
     }
 
     /**
@@ -64,6 +76,10 @@ public class BinarySearchST<K extends Comparable<K>, V> implements ST<K, V> {
         int idx = rank(key);
         if (idx < 0) {
             return;
+        }
+
+        if (lastAccessed == items[idx]) {
+            lastAccessed = null;
         }
 
         System.arraycopy(items, idx + 1, items, idx, size - idx - 1);

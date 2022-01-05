@@ -145,4 +145,26 @@ public abstract class StTests {
         IllegalStateException e2 = assertThrows(IllegalStateException.class, () -> st2.put("e", 5));
         assertEquals("ST is full", e2.getMessage());
     }
+
+    @Test
+    public void testContains() {
+        ST<String, Integer> st = createST(5);
+        assertFalse(st.contains("a"));
+        assertNull(st.get("a"));
+
+        st.put("a", 1);
+        assertTrue(st.contains("a"));
+        assertEquals(1, st.get("a"));
+        assertNull(st.get("b"));
+        assertFalse(st.contains("b"));
+
+        st.put("b", 2);
+        assertTrue(st.contains("b"));
+        assertEquals(2, st.get("b"));
+
+        assertTrue(st.contains("b"));
+        assertTrue(st.contains("a"));
+        assertEquals(2, st.get("b"));
+        assertEquals(1, st.get("a"));
+    }
 }

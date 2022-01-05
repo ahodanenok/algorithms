@@ -7,10 +7,20 @@ public class SequentialSearchST<K, V> implements ST<K, V> {
     private Node<K, V> head;
     private int size;
 
+    /**
+     * Book, exercise 3.1.25
+     */
+    private Node<K, V> lastAccessed;
+
     @Override
     public V get(K key) {
+        if (lastAccessed != null && lastAccessed.key.equals(key)) {
+            return lastAccessed.value;
+        }
+
         Node<K, V> node = getNode(key);
         if (node != null) {
+            lastAccessed = node;
             return node.value;
         } else {
             return null;
@@ -49,6 +59,10 @@ public class SequentialSearchST<K, V> implements ST<K, V> {
                 prev.next = node.next;
             } else {
                 head = node.next;
+            }
+
+            if (lastAccessed == node) {
+                lastAccessed = null;
             }
 
             size--;

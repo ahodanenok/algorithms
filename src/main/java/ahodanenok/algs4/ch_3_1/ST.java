@@ -6,5 +6,9 @@ public interface ST<K, V> {
 
     void put(K key, V value);
 
+    default boolean contains(K key) {
+        return get(key) != null;
+    }
+
     int size();
 }
