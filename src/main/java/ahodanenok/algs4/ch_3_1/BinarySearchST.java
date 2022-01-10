@@ -54,19 +54,38 @@ public class BinarySearchST<K extends Comparable<K>, V> implements ST<K, V> {
             return;
         }
 
+        // Book, exercise 3.1.28
+        if (size == 0 || items[size - 1].key.compareTo(key) < 0) {
+            insert(size, new Item<>(key, value));
+            return;
+        }
+
         int idx = rank(key);
         if (idx < 0) {
-            if (size == items.length) {
-                throw new IllegalStateException("ST is full");
-            }
-
-            int insertIdx = Math.abs(idx + 1) ;
-            System.arraycopy(items, insertIdx, items, insertIdx + 1, size - insertIdx);
-            items[insertIdx] = new Item<>(key, value);
-            size++;
+            insert(idx, new Item<>(key, value));
         } else {
             items[idx].value = value;
         }
+    }
+
+    private void insert(int idx, Item<K, V> item) {
+        if (size == items.length) {
+            throw new IllegalStateException("ST is full");
+        }
+
+        int insertIdx;
+        if (idx < 0) {
+            insertIdx = Math.abs(idx + 1) ;
+        } else {
+            insertIdx = idx;
+        }
+
+        if (size - insertIdx > 0) {
+            System.arraycopy(items, insertIdx, items, insertIdx + 1, size - insertIdx);
+        }
+
+        items[insertIdx] = item;
+        size++;
     }
 
     /**
